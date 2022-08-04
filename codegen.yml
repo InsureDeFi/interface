@@ -1,0 +1,28 @@
+schema: 'http://localhost:8000/subgraphs/name/insure/insure'
+overwrite: true
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+config:
+  withHooks: true
+  scalars:
+    BigDecimal: string
+    BigInt: string
+generates:
+  src/hooks/graphql/pool-data-provider/hooks.tsx:
+    documents: './src/hooks/graphql/pool-data-provider/*.graphql'
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+
+  src/hooks/graphql/user-data-provider/hooks.tsx:
+    documents: './src/hooks/graphql/user-data-provider/*.graphql'
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo

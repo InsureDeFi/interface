@@ -1,0 +1,9 @@
+query poolData($riskPool: ID!) {
+  pool(id: $riskPool) {
+    availableAssets
+    lockedAssets
+    sharesTotalSupply
+    totalAssets
+    utilizationRate
+  }
+}

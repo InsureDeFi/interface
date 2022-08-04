@@ -1,0 +1,15 @@
+query policyData($account: String!) {
+  policies(where: { insured: $account }, orderBy: startTime, orderDirection: desc) {
+    asset {
+      symbol
+    }
+    assetPrice
+    endTime
+    id
+    payOutAmount
+    premium
+    startTime
+    threshold
+    utilized
+  }
+}

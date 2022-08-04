@@ -1,0 +1,26 @@
+query liquidityPosition($account: ID!) {
+  liquidityPosition(id: $account) {
+    shares
+  }
+}
+
+query snapshots($account: String!) {
+  liquidityPositionSnapshots(first: 1000, where: { user: $account }) {
+    shares
+    sharesTotalSupply
+    totalAssets
+  }
+}
+
+query events($account: String!) {
+  deposits(where: { to: $account }) {
+    assets
+    liquidityTokens
+    timestamp
+  }
+  withdraws(where: { caller: $account }) {
+    assets
+    liquidityTokens
+    timestamp
+  }
+}

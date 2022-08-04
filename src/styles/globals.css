@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import '@fontsource/dm-sans';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/700.css';
+
+@layer base {
+  body {
+    font-family: 'DM Sans', sans-serif;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.Toastify__toast-container--top-right {
+  @apply !top-16 !right-20;
+}
+
+.Toastify__toast {
+  @apply !bg-zinc-900 !shadow-lg;
+}
+
+.Toastify__toast-body {
+  @apply !items-start font-DMSans;
+}
+
+.Toastify__toast-icon {
+  @apply !mr-4 !w-6;
+}
+
+.ju367v1c {
+  @apply !font-medium;
+}
