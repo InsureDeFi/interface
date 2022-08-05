@@ -1,9 +1,7 @@
+const withImages = require('next-images');
+
 /** @type {import('next').NextConfig} */
-module.exports = {
-  images: {
-    loader: 'akamai',
-    path: '/',
-  },
+module.exports = withImages({
   trailingSlash: true,
   reactStrictMode: true,
   webpack: (config, { isServer }) => {
@@ -12,4 +10,4 @@ module.exports = {
     }
     return config;
   },
-};
+});

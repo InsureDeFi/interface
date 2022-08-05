@@ -1,5 +1,6 @@
 import Navbar from '@components/Navbar/Navbar';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import Insure from '@images/insure.svg';
 
 export default function Header(): JSX.Element {
   return (
@@ -7,7 +8,8 @@ export default function Header(): JSX.Element {
       <div className="flex items-center gap-2">
         <img
           className="pointer-events-none select-none"
-          src="@images/insure.svg"
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          src={Insure}
           width={38}
           height={38}
           alt="Insure"

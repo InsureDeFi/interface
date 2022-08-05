@@ -1,4 +1,5 @@
 import { Chain } from '@rainbow-me/rainbowkit';
+import CKB from '@images/ckb.svg';
 
 export enum SupportedChainId {
   GODWOKEN_TESTNET = 71401,
@@ -18,7 +19,7 @@ export const CHAIN_INFO: ChainInfoMap = {
       default: { name: 'GWScan', url: 'https://v1.betanet.gwscan.com' },
     },
     testnet: true,
-    iconUrl: '@images/ckb.svg',
+    iconUrl: CKB,
     iconBackground: '#fff',
   },
 };

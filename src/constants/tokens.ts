@@ -1,5 +1,10 @@
 import { validateAndParseAddress } from '@utils/validateAndParseAddress';
 import { SupportedChainId } from './chainInfo';
+import BTC from '@images/bitcoin.svg';
+import ETH from '@images/ethereum.svg';
+import CKB from '@images/ckb.svg';
+import USDC from '@images/usdcoin.svg';
+import INSURE from '@images/insure.svg';
 
 export class Token {
   public readonly chainId: number;
@@ -24,20 +29,20 @@ export const SupportedAssets: { [asset: string]: { name: string; symbol: string;
     name: 'Bitcoin',
     symbol: 'BTC',
     decimals: 8,
-    logo: '@images/bitcoin.svg',
+    logo: BTC,
   },
 
   ETH: {
     name: 'Ethereum',
     symbol: 'ETH',
-    logo: '@images/ethereum.svg',
+    logo: ETH,
     decimals: 18,
   },
 
   CKB: {
     name: 'Nervos Network',
     symbol: 'CKB',
-    logo: '@images/ckb.svg',
+    logo: CKB,
     decimals: 8,
   },
 };
@@ -48,7 +53,7 @@ export const USDC_GODWOKEN_TESTNET = new Token(
   6,
   'USDC',
   'USDCoin',
-  '@images/usdcoin.svg'
+  USDC
 );
 
 export const RINS_GODWOKEN_TESTNET = new Token(
@@ -57,7 +62,7 @@ export const RINS_GODWOKEN_TESTNET = new Token(
   6,
   'rINS',
   'Insure LP Token',
-  '@images/insure.svg'
+  INSURE
 );
 
 export const TOKEN_SHORTHANDS: { [shorthand: string]: { [chainId: number]: Token } } = {
