@@ -15,6 +15,7 @@ import Header from '@components/Header/Header';
 import Navbar from '@components/Navbar/Navbar';
 import Avatar from '@components/Avatar/Avatar';
 import { getSupportedChains } from '@utils/networksConfig';
+import Polling from '@components/Polling/Polling';
 
 const apolloClient = new ApolloClient({
   uri: process.env.NEXT_PUBLIC_GRAPH_URI,
@@ -109,6 +110,7 @@ function App({ Component, pageProps }: AppProps) {
             <div className="fixed bottom-4 block w-full lg:hidden">
               <Navbar />
             </div>
+            <Polling />
           </div>
         </ApolloProvider>
       </RainbowKitProvider>

@@ -5,18 +5,14 @@ import Insure from '@images/insure.svg';
 export default function Header(): JSX.Element {
   return (
     <div className="flex justify-between px-2 py-4 md:px-20">
-      <div className="flex items-center gap-2">
-        <img
-          className="pointer-events-none select-none"
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          src={Insure}
-          width={38}
-          height={38}
-          alt="Insure"
-          loading="eager"
-        />
-        <span className="hidden select-none text-4xl font-bold text-zinc-100 lg:block">Insure</span>
-      </div>
+      <img
+        className="pointer-events-none select-none"
+        src={Insure}
+        width={42}
+        height={42}
+        alt="Insure"
+        loading="eager"
+      />
       <div className="absolute left-1/2 hidden -translate-x-1/2 lg:block">
         <Navbar />
       </div>
