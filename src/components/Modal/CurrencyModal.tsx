@@ -4,7 +4,7 @@ import { ChevronDown, X } from 'react-feather';
 
 import { SupportedAssets } from '@constants/tokens';
 
-export const supportedAssets = ['BTC', 'ETH', 'CKB'];
+export const supportedAssets = ['BTC', 'ETH'];
 
 type Props = {
   selectedAsset: string;

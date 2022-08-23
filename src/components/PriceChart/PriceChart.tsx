@@ -77,6 +77,10 @@ export default function PriceChart({ asset }: Props) {
     ],
   };
 
+  function formatDayChange(dayChange: number) {
+    return new Intl.NumberFormat('en-US', { signDisplay: 'exceptZero', maximumFractionDigits: 2 }).format(dayChange);
+  }
+
   return (
     <div className="px-4 pt-3">
       {priceData && historicPriceData ? (
@@ -87,10 +91,7 @@ export default function PriceChart({ asset }: Props) {
               priceData.dayChange > 0 ? 'text-[#54CD60]' : 'text-[#D15050]'
             } flex items-center text-sm font-medium`}
           >
-            {new Intl.NumberFormat('en-US', { signDisplay: 'exceptZero', maximumFractionDigits: 2 }).format(
-              priceData.dayChange
-            )}
-            % in last 24h
+            {formatDayChange(priceData.dayChange)}% in last 24h
           </span>
         </div>
       ) : (

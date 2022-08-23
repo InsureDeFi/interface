@@ -2,7 +2,6 @@ import { validateAndParseAddress } from '@utils/validateAndParseAddress';
 import { SupportedChainId } from './chainInfo';
 import BTC from '@images/bitcoin.svg';
 import ETH from '@images/ethereum.svg';
-import CKB from '@images/ckb.svg';
 import USDC from '@images/usdcoin.svg';
 import INSURE from '@images/insure.svg';
 
@@ -37,13 +36,6 @@ export const SupportedAssets: { [asset: string]: { name: string; symbol: string;
     symbol: 'ETH',
     logo: ETH,
     decimals: 18,
-  },
-
-  CKB: {
-    name: 'Nervos Network',
-    symbol: 'CKB',
-    logo: CKB,
-    decimals: 8,
   },
 };
 
