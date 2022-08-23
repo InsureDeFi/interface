@@ -43,5 +43,9 @@ input[type='number'] {
 }
 
 .ju367v1c {
+  @apply !font-normal;
+}
+
+.ju367v1d {
   @apply !font-medium;
 }
