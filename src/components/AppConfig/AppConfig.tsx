@@ -4,7 +4,7 @@ import { connectorsForWallets, midnightTheme, RainbowKitProvider, Theme, wallet 
 import { getSupportedChains } from '@utils/networksConfig';
 import merge from 'lodash.merge';
 import React from 'react';
-import { configureChains, createClient, WagmiConfig } from 'wagmi';
+import { chain, configureChains, createClient, WagmiConfig } from 'wagmi';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 
 type Props = {
@@ -18,13 +18,19 @@ const apolloClient = new ApolloClient({
 
 const supportedChains = getSupportedChains();
 
-const { chains, provider } = configureChains(supportedChains, [
-  jsonRpcProvider({
-    rpc: (chain) => ({
-      http: chain.rpcUrls.default,
+const {
+  chains: [, ...chains],
+  provider,
+} = configureChains(
+  [chain.mainnet, ...supportedChains],
+  [
+    jsonRpcProvider({
+      rpc: (chain) => ({
+        http: chain.rpcUrls.default,
+      }),
     }),
-  }),
-]);
+  ]
+);
 
 const needsInjectedWalletFallback =
   typeof window !== 'undefined' && window.ethereum && !window.ethereum.isMetaMask && !window.ethereum.isCoinbaseWallet;
