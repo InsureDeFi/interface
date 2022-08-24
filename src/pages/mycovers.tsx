@@ -12,7 +12,7 @@ const MyCovers: NextPage = () => {
         <title>My Covers | Insure</title>
       </Head>
       <div className="relative w-full select-none shadow-md sm:rounded-lg">
-        <table className="h-full w-full table-auto overflow-hidden rounded-2xl text-left text-gray-400">
+        <table className="h-full w-full table-auto overflow-hidden rounded-2xl text-center text-gray-400 md:text-left">
           <PolicyTableHead />
           <PolicyTableBody />
         </table>

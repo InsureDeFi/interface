@@ -4,7 +4,7 @@ export default function PolicyTableHead() {
   return (
     <thead className="h-12 bg-gray-700 text-sm uppercase text-gray-300 md:text-base">
       <tr>
-        <th scope="col" className="pl-3 font-medium md:pl-10">
+        <th scope="col" className="font-medium md:pl-10">
           Asset
         </th>
         <th scope="col" className="hidden font-medium lg:table-cell">
