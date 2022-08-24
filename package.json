@@ -42,7 +42,7 @@
     "@graphql-codegen/typescript-react-apollo": "3.3.3",
     "@next/eslint-plugin-next": "^12.2.3",
     "@types/lodash.merge": "^4.6.7",
-    "@types/node": "18.7.11",
+    "@types/node": "18.7.12",
     "@types/react": "18.0.15",
     "@types/react-blockies": "^1.4.1",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
