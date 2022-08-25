@@ -2,7 +2,7 @@
   {
     "inputs": [
       {
-        "internalType": "contract IAddressesProvider",
+        "internalType": "contract AddressesProvider",
         "name": "_addressesProvider",
         "type": "address"
       },
@@ -17,12 +17,7 @@
   },
   {
     "inputs": [],
-    "name": "AssetAlreadyInitialized",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "AssetNotSupported",
+    "name": "RiskPool__AssetNotSupported",
     "type": "error"
   },
   {
@@ -38,7 +33,7 @@
         "type": "uint256"
       }
     ],
-    "name": "CoverLessThanMinimum",
+    "name": "RiskPool__CoverLessThanMinimum",
     "type": "error"
   },
   {
@@ -54,7 +49,7 @@
         "type": "uint256"
       }
     ],
-    "name": "DurationTooLong",
+    "name": "RiskPool__DurationTooLong",
     "type": "error"
   },
   {
@@ -70,37 +65,27 @@
         "type": "uint256"
       }
     ],
-    "name": "DurationTooShort",
+    "name": "RiskPool__DurationTooShort",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "InsuredAddressZero",
+    "name": "RiskPool__Freezed",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "InvalidPrice",
+    "name": "RiskPool__InActive",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "NotPoolManager",
+    "name": "RiskPool__InsuredAddressZero",
     "type": "error"
   },
   {
     "inputs": [],
-    "name": "PolicyExpired",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "PolicyNotEligible",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "UnlockBeforeExpiry",
+    "name": "RiskPool__PolicyNotActive",
     "type": "error"
   },
   {
@@ -126,25 +111,6 @@
       }
     ],
     "name": "Approval",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "assetId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "asset",
-        "type": "string"
-      }
-    ],
-    "name": "AssetInitialized",
     "type": "event"
   },
   {
@@ -243,19 +209,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "account",
-        "type": "address"
-      }
-    ],
-    "name": "Paused",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": true,
         "internalType": "uint256",
         "name": "policyId",
@@ -313,19 +266,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "address",
-        "name": "account",
-        "type": "address"
-      }
-    ],
-    "name": "Unpaused",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": true,
         "internalType": "address",
         "name": "caller",
@@ -364,7 +304,7 @@
     "name": "addressesProvider",
     "outputs": [
       {
-        "internalType": "contract IAddressesProvider",
+        "internalType": "contract AddressesProvider",
         "name": "",
         "type": "address"
       }
@@ -531,6 +471,19 @@
   },
   {
     "inputs": [],
+    "name": "core",
+    "outputs": [
+      {
+        "internalType": "contract RiskPoolCore",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "decimals",
     "outputs": [
       {
@@ -591,19 +544,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getAssets",
-    "outputs": [
-      {
-        "internalType": "string[]",
-        "name": "",
-        "type": "string[]"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -624,19 +564,6 @@
         "type": "bool"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "assetSymbol",
-        "type": "string"
-      }
-    ],
-    "name": "initAsset",
-    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -672,19 +599,6 @@
       }
     ],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "lockedAssets",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -805,7 +719,7 @@
     "name": "parametersProvider",
     "outputs": [
       {
-        "internalType": "contract IParametersProvider",
+        "internalType": "contract ParametersProvider",
         "name": "",
         "type": "address"
       }
@@ -815,91 +729,12 @@
   },
   {
     "inputs": [],
-    "name": "pause",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "paused",
+    "name": "premiumEngine",
     "outputs": [
       {
-        "internalType": "bool",
+        "internalType": "contract PremiumEngine",
         "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "policies",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "premium",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "payOutAmount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "assetValue",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "endTime",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "insured",
         "type": "address"
-      },
-      {
-        "internalType": "uint8",
-        "name": "threshold",
-        "type": "uint8"
-      },
-      {
-        "internalType": "bool",
-        "name": "utilized",
-        "type": "bool"
-      },
-      {
-        "internalType": "string",
-        "name": "asset",
-        "type": "string"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "policyCount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -982,6 +817,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "priceOracle",
+    "outputs": [
+      {
+        "internalType": "contract PriceOracle",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -1007,13 +855,6 @@
         "type": "uint256"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "resume",
-    "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },

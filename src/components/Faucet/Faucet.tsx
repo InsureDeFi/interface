@@ -2,14 +2,7 @@ import { notifyError, notifySuccess } from '@components/Toast/Toast';
 import { useAddRecentTransaction } from '@rainbow-me/rainbowkit';
 import { getUSDC, STAGING_ENV } from '@utils/networksConfig';
 import React from 'react';
-import {
-  erc20ABI,
-  useAccount,
-  useContractWrite,
-  useNetwork,
-  usePrepareContractWrite,
-  useWaitForTransaction,
-} from 'wagmi';
+import { useAccount, useContractWrite, useNetwork, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 
 export default function Faucet() {
   const { address } = useAccount();
@@ -20,9 +13,23 @@ export default function Faucet() {
 
   const { config } = usePrepareContractWrite({
     addressOrName: USDC.address,
-    contractInterface: erc20ABI,
-    functionName: 'mint',
-    args: [address, 5e6],
+    contractInterface: [
+      {
+        inputs: [
+          {
+            internalType: 'address',
+            name: 'to',
+            type: 'address',
+          },
+        ],
+        name: 'claim',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+    ],
+    functionName: 'claim',
+    args: [address],
     enabled: !!address && STAGING_ENV,
   });
 

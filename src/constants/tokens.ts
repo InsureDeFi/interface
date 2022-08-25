@@ -41,7 +41,7 @@ export const SupportedAssets: { [asset: string]: { name: string; symbol: string;
 
 export const USDC_GODWOKEN_TESTNET = new Token(
   SupportedChainId.GODWOKEN_TESTNET,
-  '0xe78084E8910049908cB87000e972162FDad57689',
+  '0x9D9280f725834c1f915CC1B343f4A7D2a1e04c0b',
   6,
   'USDC',
   'USDCoin',
@@ -50,7 +50,7 @@ export const USDC_GODWOKEN_TESTNET = new Token(
 
 export const RINS_GODWOKEN_TESTNET = new Token(
   SupportedChainId.GODWOKEN_TESTNET,
-  '0x67192F5F7eCD8CeF8eDB5fB89c6BC95351bBF4d7',
+  '0xBfc2a16F2a07cDB7BCa46091156F638a0e2C25C6',
   6,
   'rINS',
   'Insure LP Token',
