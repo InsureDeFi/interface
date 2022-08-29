@@ -18,7 +18,7 @@ export function usePoolDetails(): {
 
   const { data } = usePoolDataQuery({
     variables: { riskPool: getPoolAddress(chain) },
-    pollInterval: 2000,
+    pollInterval: 4000,
     fetchPolicy: 'network-only',
   });
 

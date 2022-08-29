@@ -8,7 +8,7 @@ export function usePolicyData() {
 
   const { data } = usePolicyDataQuery({
     variables: { account: address?.toLowerCase() || AddressZero },
-    pollInterval: 2000,
+    pollInterval: 4000,
     fetchPolicy: 'network-only',
   });
 

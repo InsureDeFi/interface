@@ -10,11 +10,11 @@ export function useLiquidityData() {
   const { address } = useAccount();
   const { totalLiquidity, sharesTotalSupply } = usePoolDetails();
 
-  const { data: positions } = useLiquidityPositionQuery({
+  const { data: position } = useLiquidityPositionQuery({
     variables: {
       account: address?.toLowerCase() || AddressZero,
     },
-    pollInterval: 2000,
+    pollInterval: 4000,
     fetchPolicy: 'network-only',
   });
 
@@ -23,21 +23,21 @@ export function useLiquidityData() {
     variables: {
       account: address?.toLowerCase() || AddressZero,
     },
-    pollInterval: 2000,
+    pollInterval: 4000,
     fetchPolicy: 'network-only',
   });
 
   const { data: events } = useEventsQuery({
     variables: { account: address?.toLowerCase() || AddressZero },
-    pollInterval: 2000,
+    pollInterval: 4000,
     fetchPolicy: 'network-only',
   });
 
   return useMemo(() => {
-    if (positions && snapshots && events && address) {
+    if (position?.liquidityPosition?.shares && snapshots && events && address) {
       const returnData = getReturns(snapshots, events, sharesTotalSupply, totalLiquidity);
       return {
-        shares: positions.liquidityPosition?.shares,
+        shares: position.liquidityPosition.shares,
         principal: returnData.principal,
         fees: returnData.fees,
       };
@@ -48,5 +48,5 @@ export function useLiquidityData() {
         fees: '0',
       };
     }
-  }, [address, events, positions, sharesTotalSupply, snapshots, totalLiquidity]);
+  }, [address, events, position, sharesTotalSupply, snapshots, totalLiquidity]);
 }

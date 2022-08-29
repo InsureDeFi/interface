@@ -681,80 +681,16 @@ export enum Policy_OrderBy {
 
 export type Pool = {
   __typename?: 'Pool';
-  assets: Array<Asset>;
   availableAssets: Scalars['BigDecimal'];
-  depositHistory: Array<Deposit>;
   id: Scalars['ID'];
-  liquidityPositionSnapshots: Array<LiquidityPositionSnapshot>;
-  liquidityPositions: Array<LiquidityPosition>;
   liquidityProviderCount: Scalars['BigInt'];
   lockedAssets: Scalars['BigDecimal'];
-  paused: Scalars['Boolean'];
   policyCount: Scalars['BigInt'];
-  policyHistory: Array<Policy>;
-  poolHourData: Array<PoolHourData>;
   sharesTotalSupply: Scalars['BigDecimal'];
   totalAssets: Scalars['BigDecimal'];
   totalVolume: Scalars['BigDecimal'];
   txCount: Scalars['BigInt'];
   utilizationRate: Scalars['BigDecimal'];
-  withdrawalHistory: Array<Withdraw>;
-};
-
-export type PoolAssetsArgs = {
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Asset_OrderBy>;
-  orderDirection?: InputMaybe<OrderDirection>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Asset_Filter>;
-};
-
-export type PoolDepositHistoryArgs = {
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Deposit_OrderBy>;
-  orderDirection?: InputMaybe<OrderDirection>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Deposit_Filter>;
-};
-
-export type PoolLiquidityPositionSnapshotsArgs = {
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<LiquidityPositionSnapshot_OrderBy>;
-  orderDirection?: InputMaybe<OrderDirection>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<LiquidityPositionSnapshot_Filter>;
-};
-
-export type PoolLiquidityPositionsArgs = {
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<LiquidityPosition_OrderBy>;
-  orderDirection?: InputMaybe<OrderDirection>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<LiquidityPosition_Filter>;
-};
-
-export type PoolPolicyHistoryArgs = {
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Policy_OrderBy>;
-  orderDirection?: InputMaybe<OrderDirection>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Policy_Filter>;
-};
-
-export type PoolPoolHourDataArgs = {
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<PoolHourData_OrderBy>;
-  orderDirection?: InputMaybe<OrderDirection>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<PoolHourData_Filter>;
-};
-
-export type PoolWithdrawalHistoryArgs = {
-  first?: InputMaybe<Scalars['Int']>;
-  orderBy?: InputMaybe<Withdraw_OrderBy>;
-  orderDirection?: InputMaybe<OrderDirection>;
-  skip?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Withdraw_Filter>;
 };
 
 export type PoolDayData = {
@@ -958,12 +894,6 @@ export enum PoolHourData_OrderBy {
 }
 
 export type Pool_Filter = {
-  assets?: InputMaybe<Array<Scalars['String']>>;
-  assets_contains?: InputMaybe<Array<Scalars['String']>>;
-  assets_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
-  assets_not?: InputMaybe<Array<Scalars['String']>>;
-  assets_not_contains?: InputMaybe<Array<Scalars['String']>>;
-  assets_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
   availableAssets?: InputMaybe<Scalars['BigDecimal']>;
   availableAssets_gt?: InputMaybe<Scalars['BigDecimal']>;
   availableAssets_gte?: InputMaybe<Scalars['BigDecimal']>;
@@ -972,12 +902,6 @@ export type Pool_Filter = {
   availableAssets_lte?: InputMaybe<Scalars['BigDecimal']>;
   availableAssets_not?: InputMaybe<Scalars['BigDecimal']>;
   availableAssets_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
-  depositHistory?: InputMaybe<Array<Scalars['String']>>;
-  depositHistory_contains?: InputMaybe<Array<Scalars['String']>>;
-  depositHistory_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
-  depositHistory_not?: InputMaybe<Array<Scalars['String']>>;
-  depositHistory_not_contains?: InputMaybe<Array<Scalars['String']>>;
-  depositHistory_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
   id?: InputMaybe<Scalars['ID']>;
   id_gt?: InputMaybe<Scalars['ID']>;
   id_gte?: InputMaybe<Scalars['ID']>;
@@ -986,18 +910,6 @@ export type Pool_Filter = {
   id_lte?: InputMaybe<Scalars['ID']>;
   id_not?: InputMaybe<Scalars['ID']>;
   id_not_in?: InputMaybe<Array<Scalars['ID']>>;
-  liquidityPositionSnapshots?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositionSnapshots_contains?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositionSnapshots_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositionSnapshots_not?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositionSnapshots_not_contains?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositionSnapshots_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositions?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositions_contains?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositions_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositions_not?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositions_not_contains?: InputMaybe<Array<Scalars['String']>>;
-  liquidityPositions_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
   liquidityProviderCount?: InputMaybe<Scalars['BigInt']>;
   liquidityProviderCount_gt?: InputMaybe<Scalars['BigInt']>;
   liquidityProviderCount_gte?: InputMaybe<Scalars['BigInt']>;
@@ -1014,10 +926,6 @@ export type Pool_Filter = {
   lockedAssets_lte?: InputMaybe<Scalars['BigDecimal']>;
   lockedAssets_not?: InputMaybe<Scalars['BigDecimal']>;
   lockedAssets_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
-  paused?: InputMaybe<Scalars['Boolean']>;
-  paused_in?: InputMaybe<Array<Scalars['Boolean']>>;
-  paused_not?: InputMaybe<Scalars['Boolean']>;
-  paused_not_in?: InputMaybe<Array<Scalars['Boolean']>>;
   policyCount?: InputMaybe<Scalars['BigInt']>;
   policyCount_gt?: InputMaybe<Scalars['BigInt']>;
   policyCount_gte?: InputMaybe<Scalars['BigInt']>;
@@ -1026,18 +934,6 @@ export type Pool_Filter = {
   policyCount_lte?: InputMaybe<Scalars['BigInt']>;
   policyCount_not?: InputMaybe<Scalars['BigInt']>;
   policyCount_not_in?: InputMaybe<Array<Scalars['BigInt']>>;
-  policyHistory?: InputMaybe<Array<Scalars['String']>>;
-  policyHistory_contains?: InputMaybe<Array<Scalars['String']>>;
-  policyHistory_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
-  policyHistory_not?: InputMaybe<Array<Scalars['String']>>;
-  policyHistory_not_contains?: InputMaybe<Array<Scalars['String']>>;
-  policyHistory_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
-  poolHourData?: InputMaybe<Array<Scalars['String']>>;
-  poolHourData_contains?: InputMaybe<Array<Scalars['String']>>;
-  poolHourData_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
-  poolHourData_not?: InputMaybe<Array<Scalars['String']>>;
-  poolHourData_not_contains?: InputMaybe<Array<Scalars['String']>>;
-  poolHourData_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
   sharesTotalSupply?: InputMaybe<Scalars['BigDecimal']>;
   sharesTotalSupply_gt?: InputMaybe<Scalars['BigDecimal']>;
   sharesTotalSupply_gte?: InputMaybe<Scalars['BigDecimal']>;
@@ -1078,33 +974,19 @@ export type Pool_Filter = {
   utilizationRate_lte?: InputMaybe<Scalars['BigDecimal']>;
   utilizationRate_not?: InputMaybe<Scalars['BigDecimal']>;
   utilizationRate_not_in?: InputMaybe<Array<Scalars['BigDecimal']>>;
-  withdrawalHistory?: InputMaybe<Array<Scalars['String']>>;
-  withdrawalHistory_contains?: InputMaybe<Array<Scalars['String']>>;
-  withdrawalHistory_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
-  withdrawalHistory_not?: InputMaybe<Array<Scalars['String']>>;
-  withdrawalHistory_not_contains?: InputMaybe<Array<Scalars['String']>>;
-  withdrawalHistory_not_contains_nocase?: InputMaybe<Array<Scalars['String']>>;
 };
 
 export enum Pool_OrderBy {
-  Assets = 'assets',
   AvailableAssets = 'availableAssets',
-  DepositHistory = 'depositHistory',
   Id = 'id',
-  LiquidityPositionSnapshots = 'liquidityPositionSnapshots',
-  LiquidityPositions = 'liquidityPositions',
   LiquidityProviderCount = 'liquidityProviderCount',
   LockedAssets = 'lockedAssets',
-  Paused = 'paused',
   PolicyCount = 'policyCount',
-  PolicyHistory = 'policyHistory',
-  PoolHourData = 'poolHourData',
   SharesTotalSupply = 'sharesTotalSupply',
   TotalAssets = 'totalAssets',
   TotalVolume = 'totalVolume',
   TxCount = 'txCount',
   UtilizationRate = 'utilizationRate',
-  WithdrawalHistory = 'withdrawalHistory',
 }
 
 export type Query = {

@@ -1,4 +1,4 @@
-schema: 'http://localhost:8000/subgraphs/name/insure/insure'
+schema: 'http://localhost:8000/subgraphs/name/insuredefi/insure'
 overwrite: true
 hooks:
   afterAllFileWrite:
