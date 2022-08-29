@@ -5,7 +5,7 @@ import { AlertTriangle, X } from 'react-feather';
 import { Oval } from 'react-loader-spinner';
 import { useContractWrite, useNetwork, usePrepareContractWrite, useWaitForTransaction } from 'wagmi';
 
-import RiskPoolABI from '../../assets/abi/RiskPool.json';
+import RiskPoolABI from 'assets/abi/RiskPool.json';
 import { chainToExplorerUrl, getPoolAddress } from '@utils/networksConfig';
 import { notifyError, notifySuccess } from '@components/Toast/Toast';
 import AnimatedCheckmark from './AnimatedCheckmark';
@@ -50,12 +50,13 @@ export default function TransactionModal({
   } = useContractWrite({
     ...config,
     onSuccess(txResponse) {
-      addRecentTransaction({ hash: txResponse.hash, description: desc });
+      addRecentTransaction({ hash: txResponse.hash, description: desc, confirmations: 2 });
     },
   });
 
   const { isLoading: isSubmitted, isSuccess } = useWaitForTransaction({
     hash: txnResponse?.hash,
+    confirmations: 2,
     onSuccess(txReceipt) {
       notifySuccess(title, txReceipt.transactionHash, chain);
     },
@@ -153,7 +154,7 @@ export default function TransactionModal({
                       ? 'Transaction submitted'
                       : isSuccess
                       ? 'Success'
-                      : txnError?.message}
+                      : 'User denied transaction signature'}
                   </span>
                   <span className="mt-1 text-center text-lg text-zinc-300">{desc}</span>
                   {txnResponse?.hash ? (

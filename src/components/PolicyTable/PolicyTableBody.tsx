@@ -13,7 +13,7 @@ export default function PolicyTableBody() {
           const isActive = new Date(Number(endTime) * 1000) > new Date();
           return (
             <tr className="h-12 border-b border-gray-700 bg-zinc-900" key={id}>
-              <td className="whitespace-nowrap pl-3 text-zinc-200 md:pl-10">
+              <td className="whitespace-nowrap pl-2 text-zinc-200 md:pl-10">
                 <div className="flex items-center justify-start">
                   <img src={SupportedAssets[symbol].logo} height={24} width={24} loading="eager" alt={symbol} />
                   <span className="mx-2">{SupportedAssets[symbol].name}</span>

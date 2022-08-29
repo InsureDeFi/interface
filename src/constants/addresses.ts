@@ -4,6 +4,6 @@ type AddressMap = { [chainId: number]: { RISK_POOL: string } };
 
 export const ADDRESSES: AddressMap = {
   [SupportedChainId.GODWOKEN_TESTNET]: {
-    RISK_POOL: '0xBfc2a16F2a07cDB7BCa46091156F638a0e2C25C6',
+    RISK_POOL: '0x268fFA81C5668E8c918c7CFf2796edf8eBff7bFe',
   },
 };

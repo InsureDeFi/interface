@@ -35,8 +35,8 @@ export function useApproval(
         description: `Approve ${token.symbol}`,
       });
     },
-    onError(err) {
-      notifyError(err.message);
+    onError() {
+      notifyError('User denied transaction signature.');
     },
   });
 

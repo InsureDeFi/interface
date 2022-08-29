@@ -17,7 +17,7 @@ export default function PolicyTableHead() {
           Asset Price
         </th>
         <th scope="col" className="hidden font-medium lg:table-cell">
-          Premium
+          Premium Paid
         </th>
         <th scope="col" className="font-medium">
           Cover

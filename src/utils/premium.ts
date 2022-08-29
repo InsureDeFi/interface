@@ -1,7 +1,7 @@
 import { BigNumber, FixedNumber } from '@ethersproject/bignumber';
 
-const k = BigNumber.from(40000000000);
-const a = k.mul(1e6).div(120000);
+const k = BigNumber.from(30000000000);
+const a = k.mul(1e6).div(1200000);
 
 const BASE = BigNumber.from(1e6);
 const BASE_FN = FixedNumber.from(1e6);
