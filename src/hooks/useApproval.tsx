@@ -6,6 +6,8 @@ import { erc20ABI, useContractWrite, useNetwork, usePrepareContractWrite, useWai
 import { Token } from '@constants/tokens';
 import { notifyError, notifySuccess } from '@components/Toast/Toast';
 import { useTokenAllowance } from './useTokenAllowance';
+import { STAGING_ENV } from '@utils/networksConfig';
+import { MaxUint256 } from '@ethersproject/constants';
 
 export function useApproval(
   token: Token,
@@ -18,12 +20,13 @@ export function useApproval(
   const { chain } = useNetwork();
   const allowance = useTokenAllowance(token, spender);
   const addRecentTransaction = useAddRecentTransaction();
+  const amountToApprove = STAGING_ENV ? MaxUint256 : amount;
 
   const { config } = usePrepareContractWrite({
     addressOrName: token.address,
     contractInterface: erc20ABI,
     functionName: 'approve',
-    args: [spender, amount],
+    args: [spender, amountToApprove],
     enabled: !!amount,
   });
 
