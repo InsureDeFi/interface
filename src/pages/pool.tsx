@@ -1,39 +1,18 @@
 import { Tab } from '@headlessui/react';
 import { NextPage } from 'next';
-import Head from 'next/head';
 import React from 'react';
-import { useContractRead, useNetwork } from 'wagmi';
-
 import Deposit from '@components/Deposit/Deposit';
 import PoolDetails from '@components/PoolDetails/PoolDetails';
 import Withdraw from '@components/Withdraw/Withdraw';
-import { useLiquidityData } from '@hooks/useLiquidityData';
-import { getPoolAddress } from '@utils/networksConfig';
-import riskPoolAbi from '../assets/abi/RiskPool.json';
-import { formatBignumber, stringToBignumber } from '@utils/helper';
-import { formatCurrency } from '@coingecko/cryptoformat';
 import Faucet from '@components/Faucet/Faucet';
+import UserLiquidity from '@components/UserLiquidity/UserLiquidity';
+import PageLayout from '@components/PageLayout/PageLayout';
 
 const tabs = ['Deposit', 'Withdraw'];
 
 const Pool: NextPage = () => {
-  const { shares, fees } = useLiquidityData();
-  const { chain } = useNetwork();
-
-  const { data: userAssets } = useContractRead({
-    addressOrName: getPoolAddress(chain),
-    contractInterface: riskPoolAbi,
-    functionName: 'convertToAssets',
-    args: stringToBignumber(shares, 6),
-    enabled: !!shares,
-    watch: true,
-  });
-
   return (
-    <>
-      <Head>
-        <title>Underwrite | Insure</title>
-      </Head>
+    <PageLayout title="Underwrite | Insure">
       <div className="w-full">
         <div className="mx-auto flex w-full max-w-6xl select-none flex-col gap-6 rounded-2xl bg-zinc-900/20 p-4 lg:flex-row">
           <PoolDetails />
@@ -54,16 +33,7 @@ const Pool: NextPage = () => {
                 ))}
               </Tab.List>
               <Tab.Panels className="mt-2">
-                <div className="mt-4 w-full rounded-2xl bg-zinc-900 p-4 text-lg text-zinc-200">
-                  <div className="flex items-center justify-between">
-                    <div>Liquidity (Including Fees)</div>
-                    <div>{formatCurrency(Number(formatBignumber(userAssets, 6)), 'USD', 'en')}</div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div>Fees Earned</div>
-                    <div>{formatCurrency(Number(fees), 'USD', 'en')}</div>
-                  </div>
-                </div>
+                <UserLiquidity />
                 <Deposit />
                 <Withdraw />
               </Tab.Panels>
@@ -72,7 +42,7 @@ const Pool: NextPage = () => {
         </div>
         <Faucet />
       </div>
-    </>
+    </PageLayout>
   );
 };
 

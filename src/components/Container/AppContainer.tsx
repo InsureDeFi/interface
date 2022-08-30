@@ -1,8 +1,8 @@
+import CloseButton from '@components/Button/CloseButton';
 import Header from '@components/Header/Header';
 import Navbar from '@components/Navbar/Navbar';
 import Polling from '@components/Polling/Polling';
 import React from 'react';
-import { X } from 'react-feather';
 import { ToastContainer } from 'react-toastify';
 
 type Props = {
@@ -24,11 +24,7 @@ export default function AppContainer({ children }: Props) {
         <div className="flex justify-center pt-4 pb-20 md:pt-16 md:pb-0">{children}</div>
         <ToastContainer
           className="!w-[400px]"
-          closeButton={({ closeToast }) => (
-            <div onClick={closeToast}>
-              <X className="h-5 text-gray-200" />
-            </div>
-          )}
+          closeButton={CloseButton}
           theme="dark"
           autoClose={7000}
           pauseOnFocusLoss={false}
