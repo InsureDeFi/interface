@@ -41,8 +41,8 @@ export default function Faucet() {
         description: 'Claim Test Token',
       });
     },
-    onError(err) {
-      notifyError(err.message);
+    onError() {
+      notifyError('User denied transaction signature.');
     },
   });
 

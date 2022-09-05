@@ -47,6 +47,7 @@ export default function TransactionModal({
     write,
     error: txnError,
     isLoading,
+    isSuccess,
   } = useContractWrite({
     ...config,
     onSuccess(txResponse) {
@@ -54,7 +55,7 @@ export default function TransactionModal({
     },
   });
 
-  const { isLoading: isSubmitted, isSuccess } = useWaitForTransaction({
+  useWaitForTransaction({
     hash: txnResponse?.hash,
     confirmations: 2,
     onSuccess(txReceipt) {
@@ -133,7 +134,7 @@ export default function TransactionModal({
                   <X className="h-5 cursor-pointer text-zinc-100" onClick={closeModal} />
                 </div>
                 <div className="flex flex-col items-center pt-10">
-                  {isLoading || isSubmitted ? (
+                  {isLoading ? (
                     <Oval
                       ariaLabel="loading-indicator"
                       height={90}
@@ -150,10 +151,8 @@ export default function TransactionModal({
                   <span className="mt-6 text-center text-xl font-medium text-zinc-200">
                     {isLoading
                       ? 'Confirm transaction in wallet'
-                      : isSubmitted
-                      ? 'Transaction submitted'
                       : isSuccess
-                      ? 'Success'
+                      ? 'Transaction submitted'
                       : 'User denied transaction signature'}
                   </span>
                   <span className="mt-1 text-center text-lg text-zinc-300">{desc}</span>
