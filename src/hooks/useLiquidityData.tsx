@@ -51,14 +51,14 @@ export function useLiquidityData() {
         shares: shares,
         assets: formatBignumber(assets, 6),
         principal: returnData.principal,
-        fees: returnData.fees,
+        fees: returnData.fees.toString(),
       };
     } else {
       return {
         shares: undefined,
-        assets: formatBignumber(assets, 6),
-        principal: '0',
-        fees: '0',
+        assets: undefined,
+        principal: undefined,
+        fees: undefined,
       };
     }
   }, [address, assets, events, shares, sharesTotalSupply, snapshots, totalLiquidity]);

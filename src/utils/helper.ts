@@ -18,8 +18,8 @@ export function stringToBignumber(amount?: string, decimals?: number): BigNumber
   return parseUnits(amount, decimals);
 }
 
-export function formatCurrency(amount: string): string {
-  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact' }).format(
+export function formatCurrency(amount: string, options?: Intl.NumberFormatOptions | undefined): string {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact', ...options }).format(
     Number(amount)
   );
 }

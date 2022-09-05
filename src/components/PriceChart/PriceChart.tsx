@@ -11,9 +11,8 @@ import {
 import type { ChartData, ChartOptions } from 'chart.js';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-
 import { usePriceData } from '@hooks/usePriceData';
-import { formatCurrency } from '@coingecko/cryptoformat';
+import { formatCurrency } from '@utils/helper';
 
 type Props = {
   asset: string;
@@ -36,7 +35,7 @@ const options: ChartOptions<'line'> = {
             label += ': ';
           }
           if (context.parsed.y !== null) {
-            label += formatCurrency(context.parsed.y, 'USD', 'en');
+            label += formatCurrency(context.parsed.y.toString(), { notation: 'standard' });
           }
           return label;
         },
@@ -85,7 +84,9 @@ export default function PriceChart({ asset }: Props) {
     <div className="px-4 pt-3">
       {priceData && historicPriceData ? (
         <div className="mb-2">
-          <span className="text-2xl font-medium">{formatCurrency(priceData.price, 'USD', 'en')}</span>
+          <span className="text-2xl font-medium">
+            {formatCurrency(priceData.price.toString(), { notation: 'standard' })}
+          </span>
           <span
             className={`${
               priceData.dayChange > 0 ? 'text-[#54CD60]' : 'text-[#D15050]'

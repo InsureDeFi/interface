@@ -1,8 +1,7 @@
-import { formatCurrency } from '@coingecko/cryptoformat';
 import React from 'react';
-
 import { SupportedAssets } from '@constants/tokens';
 import { usePolicyData } from '@hooks/usePolicyData';
+import { formatCurrency } from '@utils/helper';
 
 export default function PolicyTableBody() {
   const { ownedPolicies } = usePolicyData();
@@ -26,12 +25,12 @@ export default function PolicyTableBody() {
                 {new Date(Number(endTime) * 1000).toLocaleDateString()}
               </td>
               <td className="hidden whitespace-nowrap text-zinc-200 lg:table-cell">
-                {formatCurrency(Number(assetPrice), 'USD', 'en')}
+                {formatCurrency(assetPrice, { notation: 'standard' })}
               </td>
               <td className="hidden whitespace-nowrap text-zinc-200 lg:table-cell">
-                {formatCurrency(Number(premium), 'USD', 'en')}
+                {formatCurrency(premium, { notation: 'standard' })}
               </td>
-              <td className="whitespace-nowrap text-zinc-200">{formatCurrency(Number(payOutAmount), 'USD', 'en')}</td>
+              <td className="whitespace-nowrap text-zinc-200">{formatCurrency(payOutAmount)}</td>
               <td className="whitespace-nowrap text-zinc-200">
                 <span
                   className={`rounded-full px-2 py-1 text-xs font-bold uppercase ${

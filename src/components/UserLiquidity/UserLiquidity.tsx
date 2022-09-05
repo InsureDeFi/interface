@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLiquidityData } from '@hooks/useLiquidityData';
-import { formatCurrency } from '@coingecko/cryptoformat';
+import { formatCurrency } from '@utils/helper';
 
 export default function UserLiquidity() {
   const { assets, fees } = useLiquidityData();
@@ -9,11 +9,11 @@ export default function UserLiquidity() {
     <div className="mt-4 w-full rounded-2xl bg-zinc-900 p-4 text-lg text-zinc-200">
       <div className="flex items-center justify-between">
         <div>Liquidity (Including Fees)</div>
-        <div>{formatCurrency(Number(assets), 'USD', 'en')}</div>
+        <div>{assets && formatCurrency(assets)}</div>
       </div>
       <div className="flex items-center justify-between">
         <div>Fees Earned</div>
-        <div>{formatCurrency(Number(fees), 'USD', 'en')}</div>
+        <div>{fees && formatCurrency(fees)}</div>
       </div>
     </div>
   );
