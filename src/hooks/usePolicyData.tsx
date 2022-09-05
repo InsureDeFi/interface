@@ -9,7 +9,6 @@ export function usePolicyData() {
   const { data } = usePolicyDataQuery({
     variables: { account: address?.toLowerCase() || AddressZero },
     pollInterval: 4000,
-    fetchPolicy: 'network-only',
   });
 
   const ownedPolicies = data?.policies;

@@ -18,7 +18,6 @@ export function useLiquidityData() {
       account: address?.toLowerCase() || AddressZero,
     },
     pollInterval: 4000,
-    fetchPolicy: 'network-only',
   });
 
   const shares = position?.liquidityPosition?.shares;
@@ -29,13 +28,11 @@ export function useLiquidityData() {
       account: address?.toLowerCase() || AddressZero,
     },
     pollInterval: 4000,
-    fetchPolicy: 'network-only',
   });
 
   const { data: events } = useEventsQuery({
     variables: { account: address?.toLowerCase() || AddressZero },
     pollInterval: 4000,
-    fetchPolicy: 'network-only',
   });
 
   const { data: assets } = useContractRead({

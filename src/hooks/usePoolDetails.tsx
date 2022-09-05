@@ -19,7 +19,6 @@ export function usePoolDetails(): {
   const { data } = usePoolDataQuery({
     variables: { riskPool: getPoolAddress(chain) },
     pollInterval: 4000,
-    fetchPolicy: 'network-only',
   });
 
   const totalLiquidity = parseAmount(data?.pool?.totalAssets);
