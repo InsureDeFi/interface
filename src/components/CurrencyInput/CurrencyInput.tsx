@@ -1,11 +1,15 @@
 import React from 'react';
-import { useAccount, useBalance } from 'wagmi';
-
+import { useAccount, useBalance, useContractRead, useNetwork } from 'wagmi';
 import { Token } from '@constants/tokens';
+import riskPoolAbi from 'assets/abi/RiskPool.json';
+import { getPoolAddress } from '@utils/networksConfig';
+import { formatBignumber } from '@utils/helper';
+import USDC from '@images/usdcoin.svg';
 
 type Props = {
   label?: string;
   currency: Token;
+  convertToAssets?: boolean;
   showBalance?: boolean;
   value: string;
   onUserInput: React.Dispatch<React.SetStateAction<string>>;
@@ -20,18 +24,30 @@ const inputRegex = /^\d*(?:\\[.])?\d*$/;
 export default function CurrencyInput({
   label,
   currency,
+  convertToAssets = false,
   showBalance = true,
   value,
   onUserInput,
   showMax = true,
 }: Props) {
   const { address } = useAccount();
+  const { chain } = useNetwork();
+
   const { data: currencyBalance } = useBalance({
     addressOrName: address,
     token: currency.address,
     formatUnits: currency.decimals,
     watch: true,
     enabled: !!address,
+  });
+
+  const { data: assets } = useContractRead({
+    addressOrName: getPoolAddress(chain),
+    contractInterface: riskPoolAbi,
+    functionName: 'convertToAssets',
+    args: currencyBalance?.value,
+    enabled: convertToAssets && !!currencyBalance,
+    watch: true,
   });
 
   const enforcer = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +66,9 @@ export default function CurrencyInput({
       <div className="flex w-full items-center justify-between">
         <div>{label || 'Input'}</div>
         {showBalance && currencyBalance && (
-          <div className="flex items-center gap-1">Balance: {currencyBalance.formatted}</div>
+          <div className="flex items-center gap-1">
+            Balance: {convertToAssets ? formatBignumber(assets, 6) : currencyBalance.formatted}
+          </div>
         )}
       </div>
       <div className="mt-4 flex w-full items-center justify-between gap-4 overflow-hidden">
@@ -69,14 +87,20 @@ export default function CurrencyInput({
         {showMax && (
           <button
             className="font-bold text-red-500"
-            onClick={() => currencyBalance && onUserInput(currencyBalance.formatted)}
+            onClick={() => {
+              if (convertToAssets) {
+                onUserInput(formatBignumber(assets, 6));
+              } else {
+                currencyBalance && onUserInput(currencyBalance.formatted);
+              }
+            }}
           >
             MAX
           </button>
         )}
         <div className="flex items-center gap-1.5 rounded-full bg-zinc-700 bg-opacity-60 px-2 py-1">
-          <img src={currency.logo} height={26} width={26} alt={currency.name} loading="eager" />
-          <div>{currency.symbol}</div>
+          <img src={USDC} height={26} width={26} alt="USDC" loading="eager" />
+          <div>USDC</div>
         </div>
       </div>
     </div>

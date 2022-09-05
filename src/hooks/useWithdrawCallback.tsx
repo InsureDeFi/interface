@@ -21,18 +21,17 @@ interface UseWithdrawReturns {
 
 export function useWithdrawCallback(removeAmount: string): UseWithdrawReturns {
   const { address } = useAccount();
-  const { shares } = useLiquidityData();
+  const { assets } = useLiquidityData();
   const { availableLiquidity } = usePoolDetails();
   const { chain } = useNetwork();
   const USDC = getUSDC(chain);
   const removeAmountBign = stringToBignumber(removeAmount, USDC.decimals);
 
   return useMemo(() => {
-    const calldata = { function: 'redeem', args: [removeAmountBign, address, address] };
-    //TODO
+    const calldata = { function: 'withdraw', args: [removeAmountBign, address, address] };
     if (removeAmountBign.isZero()) {
       return { state: UseWithdrawCallbackState.INVALID, label: 'Enter an amount', calldata };
-    } else if (removeAmountBign.gt(stringToBignumber(shares, 6))) {
+    } else if (removeAmountBign.gt(stringToBignumber(assets, 6))) {
       return { state: UseWithdrawCallbackState.INVALID, label: 'Insufficient balance', calldata };
     } else if (removeAmountBign.gt(parseUnits(availableLiquidity, 6))) {
       return {
@@ -47,5 +46,5 @@ export function useWithdrawCallback(removeAmount: string): UseWithdrawReturns {
         calldata,
       };
     }
-  }, [removeAmountBign, address, shares, availableLiquidity]);
+  }, [removeAmountBign, address, assets, availableLiquidity]);
 }
