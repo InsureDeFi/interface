@@ -26,9 +26,10 @@ const Home: NextPage = () => {
   return (
     <PageLayout title="Purchase | Insure">
       <div className="w-full max-w-lg select-none rounded-3xl bg-zinc-900/20 p-2 md:p-4">
-        <div className="w-full rounded-2xl bg-zinc-900 py-4 text-zinc-200">
+        <div className="mb-4 w-full rounded-2xl bg-zinc-900 py-4 text-zinc-200">
           <CurrencyModal selectedAsset={asset} setAsset={setAsset} />
           <PriceChart asset={asset} />
+          <PoolCapacity premium={premium} />
           <CurrencyInput
             label="Cover Amount"
             currency={USDC}
@@ -41,7 +42,6 @@ const Home: NextPage = () => {
             <Duration value={duration} onUserClick={setDuration} />
           </div>
         </div>
-        <PoolCapacity premium={premium} />
 
         <TransactionModal
           data={{
