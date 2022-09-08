@@ -562,11 +562,6 @@
     stream-browserify "^3.0.0"
     util "^0.12.4"
 
-"@coingecko/cryptoformat@^0.5.4":
-  version "0.5.4"
-  resolved "https://registry.yarnpkg.com/@coingecko/cryptoformat/-/cryptoformat-0.5.4.tgz#b105b44e48466f480ef72b720c40618c723752b9"
-  integrity sha512-qAHbG/TjKbyPE0hRCeET1+8qBs4dtpXVyXDeSj0xhENLPBFW9tNTY2OOYr9Fw5fAylHJkCdhdn7Htk18ZSyxFw==
-
 "@cspotcode/source-map-support@^0.8.0":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@cspotcode/source-map-support/-/source-map-support-0.8.1.tgz#00629c35a688e05a88b1cda684fb9d5e73f000a1"
@@ -7416,10 +7411,10 @@ typedarray-to-buffer@3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@4.7.4:
-  version "4.7.4"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
-  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
+typescript@4.8.3:
+  version "4.8.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.3.tgz#d59344522c4bc464a65a730ac695007fdb66dd88"
+  integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
 
 ua-parser-js@^0.7.30:
   version "0.7.31"
