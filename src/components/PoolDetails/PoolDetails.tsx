@@ -10,6 +10,20 @@ export default function PoolDetails() {
     usePoolDetails();
   const { shares } = useLiquidityData();
 
+  function formatPercentage(amount: number) {
+    return new Intl.NumberFormat('en-US', { style: 'percent', maximumFractionDigits: 2 }).format(amount);
+  }
+
+  function getPoolShare() {
+    if (shares) {
+      const userShare = Number(shares) / Number(sharesTotalSupply);
+      if (userShare < 0.0001) return '< 0.01%';
+      return formatPercentage(userShare);
+    } else {
+      return '-';
+    }
+  }
+
   return (
     <div className="flex flex-col rounded-2xl bg-zinc-900 p-4 text-lg text-zinc-200 lg:w-[60%]">
       <div className="my-auto">
@@ -48,13 +62,11 @@ export default function PoolDetails() {
           </div>
           <div className="mx-auto">
             <div className="text-zinc-400">Utilization Rate</div>
-            <div className="text-center text-xl font-medium">{utilizationRate}%</div>
+            <div className="text-center text-xl font-medium">{formatPercentage(utilizationRate)}</div>
           </div>
           <div className="mx-auto">
             <div className="text-zinc-400">Your Share</div>
-            <div className="text-center text-xl font-medium">
-              {shares ? `${parseFloat(((Number(shares) / Number(sharesTotalSupply)) * 100).toFixed(2))}%` : '-'}
-            </div>
+            <div className="text-center text-xl font-medium">{getPoolShare()}</div>
           </div>
           <div className="mx-auto">
             <div className="text-zinc-400">USDC Price</div>

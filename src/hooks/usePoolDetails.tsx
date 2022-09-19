@@ -24,7 +24,7 @@ export function usePoolDetails(): {
   const totalLiquidity = parseAmount(data?.pool?.totalAssets);
   const availableLiquidity = parseAmount(data?.pool?.availableAssets);
   const lockedAmount = parseAmount(data?.pool?.lockedAssets);
-  const utilizationRate = parseFloat((Number(parseAmount(data?.pool?.utilizationRate)) * 100).toFixed(2));
+  const utilizationRate = Number(parseAmount(data?.pool?.utilizationRate));
   const sharesTotalSupply = parseAmount(data?.pool?.sharesTotalSupply);
 
   const poolData: DataEntry[] = useMemo(
