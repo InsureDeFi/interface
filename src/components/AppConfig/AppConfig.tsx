@@ -32,19 +32,16 @@ const {
   ]
 );
 
-const needsInjectedWalletFallback =
-  typeof window !== 'undefined' && window.ethereum && !window.ethereum.isMetaMask && !window.ethereum.isCoinbaseWallet;
-
 const connectors = connectorsForWallets([
   {
     groupName: 'Recommended',
     wallets: [
+      wallet.injected({ chains }),
       wallet.metaMask({ chains }),
       wallet.walletConnect({ chains }),
       wallet.coinbase({ appName: 'Insure', chains }),
       wallet.brave({ chains }),
       wallet.imToken({ chains }),
-      ...(needsInjectedWalletFallback ? [wallet.injected({ chains })] : []),
     ],
   },
 ]);
@@ -77,6 +74,7 @@ export default function AppConfig({ children }: Props) {
         appInfo={{ appName: 'Insure' }}
         chains={chains}
         theme={appTheme}
+        modalSize="compact"
         showRecentTransactions
       >
         <ApolloProvider client={apolloClient}>{children}</ApolloProvider>
