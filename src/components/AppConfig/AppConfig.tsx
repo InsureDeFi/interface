@@ -34,14 +34,20 @@ const {
 
 const connectors = connectorsForWallets([
   {
-    groupName: 'Recommended',
+    groupName: 'Popular',
     wallets: [
-      wallet.injected({ chains }),
       wallet.metaMask({ chains }),
       wallet.walletConnect({ chains }),
       wallet.coinbase({ appName: 'Insure', chains }),
+    ],
+  },
+  {
+    groupName: 'More',
+    wallets: [
+      wallet.injected({ chains }),
       wallet.brave({ chains }),
       wallet.imToken({ chains }),
+      wallet.trust({ chains }),
     ],
   },
 ]);
