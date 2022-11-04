@@ -51,13 +51,12 @@ export default function TransactionModal({
   } = useContractWrite({
     ...config,
     onSuccess(txResponse) {
-      addRecentTransaction({ hash: txResponse.hash, description: desc, confirmations: 2 });
+      addRecentTransaction({ hash: txResponse.hash, description: desc });
     },
   });
 
   useWaitForTransaction({
     hash: txnResponse?.hash,
-    confirmations: 2,
     onSuccess(txReceipt) {
       notifySuccess(title, txReceipt.transactionHash, chain);
     },

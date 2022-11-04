@@ -1,10 +1,4 @@
-query liquidityPosition($account: ID!) {
-  liquidityPosition(id: $account) {
-    shares
-  }
-}
-
-query snapshots($account: String!) {
+query snapshots($account: String) {
   liquidityPositionSnapshots(first: 1000, where: { user: $account }) {
     shares
     sharesTotalSupply
@@ -12,7 +6,7 @@ query snapshots($account: String!) {
   }
 }
 
-query events($account: String!) {
+query events($account: String) {
   deposits(where: { to: $account }) {
     assets
     liquidityTokens

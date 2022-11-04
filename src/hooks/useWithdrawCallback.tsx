@@ -22,7 +22,7 @@ interface UseWithdrawReturns {
 export function useWithdrawCallback(removeAmount: string): UseWithdrawReturns {
   const { address } = useAccount();
   const { assets } = useLiquidityData();
-  const { availableLiquidity } = usePoolDetails();
+  const { availableAssets } = usePoolDetails();
   const { chain } = useNetwork();
   const USDC = getUSDC(chain);
   const removeAmountBign = stringToBignumber(removeAmount, USDC.decimals);
@@ -33,7 +33,7 @@ export function useWithdrawCallback(removeAmount: string): UseWithdrawReturns {
       return { state: UseWithdrawCallbackState.INVALID, label: 'Enter an amount', calldata };
     } else if (removeAmountBign.gt(stringToBignumber(assets, 6))) {
       return { state: UseWithdrawCallbackState.INVALID, label: 'Insufficient balance', calldata };
-    } else if (removeAmountBign.gt(parseUnits(availableLiquidity, 6))) {
+    } else if (removeAmountBign.gt(parseUnits(availableAssets, 6))) {
       return {
         state: UseWithdrawCallbackState.INVALID,
         label: 'Insufficient liquidity',
@@ -46,5 +46,5 @@ export function useWithdrawCallback(removeAmount: string): UseWithdrawReturns {
         calldata,
       };
     }
-  }, [removeAmountBign, address, assets, availableLiquidity]);
+  }, [removeAmountBign, address, assets, availableAssets]);
 }

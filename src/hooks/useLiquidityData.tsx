@@ -1,29 +1,30 @@
-import { AddressZero } from '@ethersproject/constants';
 import { useAccount, useBalance, useContractRead, useNetwork } from 'wagmi';
 import { useMemo } from 'react';
-import { useSnapshotsQuery, useEventsQuery } from './graphql/user-data-provider/hooks';
 import { getReturns } from '@utils/returns';
 import { usePoolDetails } from './usePoolDetails';
 import { getPoolAddress } from '@utils/networksConfig';
 import { formatBignumber } from '@utils/helper';
 import riskPoolAbi from 'assets/abi/RiskPool.json';
+import { getBuiltGraphSDK } from '../../.graphclient';
+import { useQuery } from '@tanstack/react-query';
+
+const sdk = getBuiltGraphSDK();
 
 export function useLiquidityData() {
   const { address } = useAccount();
-  const { totalLiquidity, sharesTotalSupply } = usePoolDetails();
+  const { totalAssets, sharesTotalSupply } = usePoolDetails();
   const { chain } = useNetwork();
 
-  //TODO
-  const { data: snapshots } = useSnapshotsQuery({
-    variables: {
-      account: address?.toLowerCase() || AddressZero,
-    },
-    pollInterval: 4000,
+  const { data: snapshots } = useQuery(['snapshots'], async () => sdk.snapshots({ account: address?.toLowerCase() }), {
+    keepPreviousData: true,
+    enabled: !!address,
+    refetchInterval: 4000,
   });
 
-  const { data: events } = useEventsQuery({
-    variables: { account: address?.toLowerCase() || AddressZero },
-    pollInterval: 4000,
+  const { data: events } = useQuery(['events'], async () => sdk.events({ account: address?.toLowerCase() }), {
+    keepPreviousData: true,
+    enabled: !!address,
+    refetchInterval: 4000,
   });
 
   const { data: shares } = useBalance({
@@ -44,7 +45,7 @@ export function useLiquidityData() {
 
   return useMemo(() => {
     if (shares && snapshots && events && address) {
-      const returnData = getReturns(snapshots, events, sharesTotalSupply, totalLiquidity);
+      const returnData = getReturns(snapshots, events, sharesTotalSupply, totalAssets);
       return {
         shares: shares.formatted,
         assets: formatBignumber(assets, 6),
@@ -59,5 +60,5 @@ export function useLiquidityData() {
         fees: undefined,
       };
     }
-  }, [address, assets, events, shares, sharesTotalSupply, snapshots, totalLiquidity]);
+  }, [address, assets, events, shares, sharesTotalSupply, snapshots, totalAssets]);
 }

@@ -6,8 +6,7 @@ import { usePoolDetails } from '@hooks/usePoolDetails';
 import { formatCurrency } from '@utils/helper';
 
 export default function PoolDetails() {
-  const { totalLiquidity, availableLiquidity, lockedAmount, utilizationRate, sharesTotalSupply, poolData } =
-    usePoolDetails();
+  const { totalAssets, availableAssets, lockedAssets, utilizationRate, sharesTotalSupply, poolData } = usePoolDetails();
   const { shares } = useLiquidityData();
 
   function formatPercentage(amount: number) {
@@ -30,12 +29,12 @@ export default function PoolDetails() {
         <div className="flex flex-col items-center justify-center py-4 lg:flex-row">
           <div>
             <div className="text-center text-zinc-400 lg:text-right">Locked Liquidity</div>
-            <div className="text-center text-xl font-medium lg:text-right">{formatCurrency(lockedAmount)}</div>
+            <div className="text-center text-xl font-medium lg:text-right">{formatCurrency(lockedAssets)}</div>
           </div>
           <PieChart
             className="my-4 w-40 lg:my-0 lg:mx-4"
             data={poolData}
-            totalValue={Number(totalLiquidity)}
+            totalValue={Number(totalAssets)}
             startAngle={270}
             animate
             lineWidth={16}
@@ -52,17 +51,17 @@ export default function PoolDetails() {
           </PieChart>
           <div>
             <div className="text-center text-zinc-400 lg:text-left">Available Liquidity</div>
-            <div className="text-center text-xl font-medium lg:text-left">{formatCurrency(availableLiquidity)}</div>
+            <div className="text-center text-xl font-medium lg:text-left">{formatCurrency(availableAssets)}</div>
           </div>
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-4 px-2 md:mt-8 md:gap-8 md:px-6">
           <div className="mx-auto">
             <div className="text-zinc-400">Reserve Size</div>
-            <div className="text-center text-xl font-medium">{formatCurrency(totalLiquidity)}</div>
+            <div className="text-center text-xl font-medium">{formatCurrency(totalAssets)}</div>
           </div>
           <div className="mx-auto">
             <div className="text-zinc-400">Utilization Rate</div>
-            <div className="text-center text-xl font-medium">{formatPercentage(utilizationRate)}</div>
+            <div className="text-center text-xl font-medium">{formatPercentage(Number(utilizationRate))}</div>
           </div>
           <div className="mx-auto">
             <div className="text-zinc-400">Your Share</div>

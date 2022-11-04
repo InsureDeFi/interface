@@ -18,7 +18,7 @@ export function useApproval(
   approve?: () => void;
 } {
   const { chain } = useNetwork();
-  const allowance = useTokenAllowance(token, spender);
+  const { data: allowance, isLoading } = useTokenAllowance(token, spender);
   const addRecentTransaction = useAddRecentTransaction();
   const amountToApprove = STAGING_ENV ? MaxUint256 : amount;
 
@@ -54,12 +54,12 @@ export function useApproval(
   });
 
   return useMemo(() => {
-    if (!allowance || !amount) return { approvalNeeded: false };
-    return allowance.lt(amount)
+    if (isLoading || !amount || !allowance) return { approvalNeeded: false };
+    return BigNumber.from(allowance).lt(amount)
       ? {
           approvalNeeded: true,
           approve: () => write?.(),
         }
       : { approvalNeeded: false };
-  }, [allowance, amount, write]);
+  }, [allowance, amount, isLoading, write]);
 }

@@ -64,13 +64,13 @@ const options: ChartOptions<'line'> = {
 };
 
 export default function PriceChart({ asset }: Props) {
-  const { historicPriceData, priceData } = usePriceData(asset);
+  const { historicPrices, priceData } = usePriceData(asset);
 
   const data: ChartData<'line'> = {
-    labels: historicPriceData?.labels,
+    labels: historicPrices?.labels,
     datasets: [
       {
-        data: historicPriceData?.dataset || [],
+        data: historicPrices?.dataset || [],
         borderColor: priceData ? (priceData.dayChange > 0 ? '#54CD60' : '#D15050') : '#fff',
       },
     ],
@@ -82,7 +82,7 @@ export default function PriceChart({ asset }: Props) {
 
   return (
     <div className="px-4 pt-3">
-      {priceData && historicPriceData ? (
+      {priceData && historicPrices ? (
         <div className="mb-2">
           <span className="text-2xl font-medium">
             {formatCurrency(priceData.price.toString(), { notation: 'standard' })}
@@ -101,7 +101,7 @@ export default function PriceChart({ asset }: Props) {
           <div className="h-3 w-32 rounded-sm bg-zinc-700"></div>
         </div>
       )}
-      {historicPriceData ? (
+      {historicPrices ? (
         <Line options={options} data={data} />
       ) : (
         <div className="aspect-[2/1] w-full animate-pulse rounded-sm bg-zinc-700"></div>
