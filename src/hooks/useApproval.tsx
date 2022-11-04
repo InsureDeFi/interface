@@ -54,7 +54,7 @@ export function useApproval(
   });
 
   return useMemo(() => {
-    if (isLoading || !amount) return { approvalNeeded: false };
+    if (isLoading || !amount || !allowance) return { approvalNeeded: false };
     return BigNumber.from(allowance).lt(amount)
       ? {
           approvalNeeded: true,

@@ -61,7 +61,7 @@ export default function PoolDetails() {
           </div>
           <div className="mx-auto">
             <div className="text-zinc-400">Utilization Rate</div>
-            <div className="text-center text-xl font-medium">{formatPercentage(utilizationRate)}</div>
+            <div className="text-center text-xl font-medium">{formatPercentage(Number(utilizationRate))}</div>
           </div>
           <div className="mx-auto">
             <div className="text-zinc-400">Your Share</div>
