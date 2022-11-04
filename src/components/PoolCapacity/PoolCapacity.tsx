@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default function PoolCapacity({ premium }: Props) {
-  const { availableLiquidity } = usePoolDetails();
+  const { availableAssets } = usePoolDetails();
 
   return (
     <div className="w-full rounded-2xl bg-zinc-900 text-lg text-zinc-200">
@@ -17,7 +17,7 @@ export default function PoolCapacity({ premium }: Props) {
         <div className="flex items-center justify-between">
           <span>Remaining capacity</span>
           <span className="text-xl">
-            {formatCurrency(availableLiquidity, { style: 'decimal' })}{' '}
+            {formatCurrency(availableAssets, { style: 'decimal' })}{' '}
             <span className="text-base font-normal text-zinc-400">USDC</span>
           </span>
         </div>

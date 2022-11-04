@@ -1,52 +1,34 @@
-import { useMemo } from 'react';
 import { DataEntry } from 'react-minimal-pie-chart/types/commonTypes';
 import { useNetwork } from 'wagmi';
-import { parseAmount } from '@utils/helper';
-
+import { getBuiltGraphSDK } from '../../.graphclient';
 import { getPoolAddress } from '@utils/networksConfig';
-import { usePoolDataQuery } from './graphql/pool-data-provider/hooks';
+import { useQuery } from '@tanstack/react-query';
 
-export function usePoolDetails(): {
-  totalLiquidity: string;
-  availableLiquidity: string;
-  lockedAmount: string;
-  utilizationRate: number;
-  sharesTotalSupply: string;
-  poolData: DataEntry[];
-} {
+const sdk = getBuiltGraphSDK();
+
+export function usePoolDetails() {
   const { chain } = useNetwork();
+  const initialData = {
+    pool: { availableAssets: '0', lockedAssets: '0', sharesTotalSupply: '0', totalAssets: '0', utilizationRate: '0' },
+  };
 
-  const { data } = usePoolDataQuery({
-    variables: { riskPool: getPoolAddress(chain) },
-    pollInterval: 4000,
+  const { data } = useQuery(['pool-data'], async () => sdk.poolData({ riskPool: getPoolAddress(chain) }), {
+    keepPreviousData: true,
+    select(data) {
+      return data.pool;
+    },
+    initialData,
+    refetchInterval: 4000,
   });
 
-  const totalLiquidity = parseAmount(data?.pool?.totalAssets);
-  const availableLiquidity = parseAmount(data?.pool?.availableAssets);
-  const lockedAmount = parseAmount(data?.pool?.lockedAssets);
-  const utilizationRate = Number(parseAmount(data?.pool?.utilizationRate));
-  const sharesTotalSupply = parseAmount(data?.pool?.sharesTotalSupply);
+  const poolData: DataEntry[] = [
+    {
+      title: 'Available Liquidity',
+      value: Number(data?.availableAssets),
+      color: '#5cca69',
+    },
+    { title: 'Total Cover', value: Number(data?.lockedAssets), color: '#df4a4a' },
+  ];
 
-  const poolData: DataEntry[] = useMemo(
-    () => [
-      {
-        title: 'Available Liquidity',
-        value: Number(availableLiquidity),
-        color: '#5cca69',
-      },
-      { title: 'Total Cover', value: Number(lockedAmount), color: '#df4a4a' },
-    ],
-    [availableLiquidity, lockedAmount]
-  );
-
-  return useMemo(() => {
-    return {
-      totalLiquidity,
-      availableLiquidity,
-      lockedAmount,
-      utilizationRate,
-      sharesTotalSupply,
-      poolData,
-    };
-  }, [availableLiquidity, lockedAmount, poolData, sharesTotalSupply, totalLiquidity, utilizationRate]);
+  return data ? { ...data, poolData } : { ...initialData.pool, poolData };
 }

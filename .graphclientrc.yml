@@ -1,0 +1,16 @@
+sources:
+  - name: insure
+    handler:
+      graphql:
+        endpoint: https://graph-gw.hostsites.ca/subgraphs/name/insuredefi/insure
+    transforms:
+      - autoPagination:
+          validateSchema: true
+
+documents:
+  - ./src/hooks/graphql/**/*.graphql
+
+codegen:
+  scalars:
+    BigDecimal: string
+    BigInt: string

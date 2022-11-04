@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import useSWR from 'swr';
+import { useQuery } from '@tanstack/react-query';
 
 interface BaseResposne {
   status: {
@@ -22,8 +22,15 @@ interface HistoricPriceData extends BaseResposne {
   };
 }
 
-const historicDataFetcher = (url: string) =>
-  fetch(url)
+const getHistoricPrices = async (asset: string) => {
+  const now = new Date();
+  const to = now.toISOString().split('T')[0];
+  now.setDate(new Date().getDate() - 365);
+  const from = now.toISOString().split('T')[0];
+
+  const res = await fetch(
+    `https://data.messari.io/api/v1/assets/${asset}/metrics/price/time-series?start=${from}&end=${to}&interval=1w&timestamp-format=rfc3339&fields=values`
+  )
     .then((response) => response.json())
     .then((data: HistoricPriceData) => {
       const monthlyPriceData = data.data.values;
@@ -31,9 +38,13 @@ const historicDataFetcher = (url: string) =>
       const dataset = monthlyPriceData.map((priceData) => priceData[4]);
       return { labels, dataset };
     });
+  return res;
+};
 
-const priceFetcher = (url: string) =>
-  fetch(url)
+const getPrice = (asset: string) =>
+  fetch(
+    `https://data.messari.io/api/v1/assets/${asset}/metrics/market-data?fields=market_data/price_usd,market_data/percent_change_usd_last_24_hours`
+  )
     .then((response) => response.json())
     .then((data: AssetPriceData) => {
       const priceData = data.data.market_data;
@@ -41,21 +52,8 @@ const priceFetcher = (url: string) =>
     });
 
 export function usePriceData(asset: string) {
-  const now = new Date();
-  const today = now.toISOString().split('T')[0];
-  now.setDate(new Date().getDate() - 365);
-  const lastYear = now.toISOString().split('T')[0];
+  const { data: priceData } = useQuery(['asset-price', asset], () => getPrice(asset));
+  const { data: historicPrices } = useQuery(['historic-prices', asset], async () => getHistoricPrices(asset));
 
-  const { data: historicPriceData } = useSWR(
-    `https://data.messari.io/api/v1/assets/${asset}/metrics/price/time-series?start=${lastYear}&end=${today}&interval=1w&timestamp-format=rfc3339&fields=values`,
-    historicDataFetcher,
-    { revalidateOnFocus: false }
-  );
-  const { data: priceData } = useSWR(
-    `https://data.messari.io/api/v1/assets/${asset}/metrics/market-data?fields=market_data/price_usd,market_data/percent_change_usd_last_24_hours`,
-    priceFetcher,
-    { revalidateOnFocus: false, refreshInterval: 10000 }
-  );
-
-  return useMemo(() => ({ historicPriceData, priceData }), [historicPriceData, priceData]);
+  return useMemo(() => ({ historicPrices, priceData }), [historicPrices, priceData]);
 }

@@ -1,17 +1,16 @@
-import { AddressZero } from '@ethersproject/constants';
-import { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
-import { usePolicyDataQuery } from './graphql/user-data-provider/hooks';
+import { getBuiltGraphSDK } from '../../.graphclient';
+
+const sdk = getBuiltGraphSDK();
 
 export function usePolicyData() {
   const { address } = useAccount();
 
-  const { data } = usePolicyDataQuery({
-    variables: { account: address?.toLowerCase() || AddressZero },
-    pollInterval: 4000,
+  return useQuery(['policy-data'], async () => sdk.policyData({ account: address?.toLowerCase() }), {
+    enabled: !!address,
+    select(data) {
+      return data.policies;
+    },
   });
-
-  const ownedPolicies = data?.policies;
-
-  return useMemo(() => ({ ownedPolicies }), [ownedPolicies]);
 }

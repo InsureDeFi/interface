@@ -37,13 +37,13 @@ export function useBuyCallback(
     watch: true,
     enabled: !!address,
   });
-  const { availableLiquidity, totalLiquidity, lockedAmount } = usePoolDetails();
+  const { availableAssets, totalAssets, lockedAssets } = usePoolDetails();
 
   const premium = calculatePremium(
     coverAmountBign,
     duration,
-    parseUnits(totalLiquidity, USDC.decimals),
-    parseUnits(lockedAmount, USDC.decimals)
+    parseUnits(totalAssets, USDC.decimals),
+    parseUnits(lockedAssets, USDC.decimals)
   );
 
   return useMemo(() => {
@@ -60,7 +60,7 @@ export function useBuyCallback(
       return { state: BuyCallbackState.INVALID, label: 'Min cover amount is 1000 USDC', calldata };
     } else if (balanceUSDC && premium.gt(balanceUSDC.value)) {
       return { state: BuyCallbackState.INVALID, label: 'Insufficient balance', calldata };
-    } else if (coverAmountBign.gt(parseUnits(availableLiquidity, USDC.decimals))) {
+    } else if (coverAmountBign.gt(parseUnits(availableAssets, USDC.decimals))) {
       return { state: BuyCallbackState.INVALID, label: 'Insufficient capacity', calldata };
     } else {
       return {
@@ -70,5 +70,5 @@ export function useBuyCallback(
         calldata,
       };
     }
-  }, [asset, coverAmountBign, duration, address, balanceUSDC, premium, availableLiquidity, USDC.decimals]);
+  }, [asset, coverAmountBign, duration, address, balanceUSDC, premium, availableAssets, USDC.decimals]);
 }

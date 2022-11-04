@@ -1,4 +1,4 @@
-import { EventsQuery, SnapshotsQuery } from '@hooks/graphql/user-data-provider/hooks';
+import { eventsQuery, snapshotsQuery } from '../../.graphclient';
 
 export interface Position {
   shares: number;
@@ -7,8 +7,8 @@ export interface Position {
 }
 
 export function getReturns(
-  snapshots: SnapshotsQuery,
-  events: EventsQuery,
+  snapshots: snapshotsQuery,
+  events: eventsQuery,
   totalSupply: string,
   totalLiquidity: string
 ) {
@@ -34,7 +34,7 @@ export function getReturns(
   return { principal, fees };
 }
 
-export function getPrincipal(events: EventsQuery) {
+export function getPrincipal(events: eventsQuery) {
   let amount = 0;
 
   events.deposits.forEach((deposit) => (amount += parseFloat(deposit.assets)));

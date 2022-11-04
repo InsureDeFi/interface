@@ -1,6 +1,6 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Avatar from '@components/Avatar/Avatar';
 import { connectorsForWallets, midnightTheme, RainbowKitProvider, Theme, wallet } from '@rainbow-me/rainbowkit';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { getSupportedChains } from '@utils/networksConfig';
 import merge from 'lodash.merge';
 import React from 'react';
@@ -11,10 +11,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const apolloClient = new ApolloClient({
-  uri: process.env.NEXT_PUBLIC_GRAPH_URI,
-  cache: new InMemoryCache(),
-});
+const queryClient = new QueryClient();
 
 const supportedChains = getSupportedChains();
 
@@ -83,7 +80,7 @@ export default function AppConfig({ children }: Props) {
         modalSize="compact"
         showRecentTransactions
       >
-        <ApolloProvider client={apolloClient}>{children}</ApolloProvider>
+        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );
