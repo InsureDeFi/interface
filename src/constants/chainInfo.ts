@@ -13,7 +13,10 @@ export const CHAIN_INFO: ChainInfoMap = {
     name: 'Godwoken Testnet v1',
     network: 'godwoken',
     nativeCurrency: { name: 'Common Knowledge Base', symbol: 'CKB', decimals: 18 },
-    rpcUrls: { default: 'https://godwoken-testnet-v1.ckbapp.dev/' },
+    rpcUrls: {
+      default: 'https://godwoken-testnet-v1.ckbapp.dev/',
+      webSocket: 'wss://godwoken-testnet-v1.ckbapp.dev/ws',
+    },
     blockExplorers: {
       etherscan: { name: 'GWScan', url: 'https://v1.betanet.gwscan.com' },
       default: { name: 'GWScan', url: 'https://v1.betanet.gwscan.com' },

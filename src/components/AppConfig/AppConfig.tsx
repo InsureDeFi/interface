@@ -18,12 +18,14 @@ const supportedChains = getSupportedChains();
 const {
   chains: [, ...chains],
   provider,
+  webSocketProvider,
 } = configureChains(
   [chain.mainnet, ...supportedChains],
   [
     jsonRpcProvider({
       rpc: (chain) => ({
         http: chain.rpcUrls.default,
+        webSocket: chain.rpcUrls.webSocket,
       }),
     }),
   ]
@@ -53,6 +55,7 @@ const wagmiClient = createClient({
   autoConnect: true,
   connectors,
   provider,
+  webSocketProvider,
 });
 
 const appTheme = merge(midnightTheme(), {
