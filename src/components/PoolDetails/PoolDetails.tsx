@@ -15,6 +15,7 @@ export default function PoolDetails() {
 
   function getPoolShare() {
     if (shares) {
+      if (Number(shares) === 0) return '0%';
       const userShare = Number(shares) / Number(sharesTotalSupply);
       if (userShare < 0.0001) return '< 0.01%';
       return formatPercentage(userShare);

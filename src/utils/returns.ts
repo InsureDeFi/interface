@@ -12,6 +12,9 @@ export function getReturns(
   totalSupply: string,
   totalLiquidity: string
 ) {
+  if (!snapshots.liquidityPositionSnapshots.length) {
+    return { principal: 0, fees: 0 };
+  }
   const lpSnapshots = snapshots.liquidityPositionSnapshots;
   const principal = getPrincipal(events);
   let fees = 0;
