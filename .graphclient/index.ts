@@ -2340,7 +2340,7 @@ const insureTransforms = [];
 const additionalTypeDefs = [] as any[];
 const insureHandler = new GraphqlHandler({
               name: "insure",
-              config: {"endpoint":"https://graph-gw.hostsites.ca/subgraphs/name/insuredefi/insure"},
+              config: {"endpoint":"https://gw-testnet-graph.nervosdao.community/subgraphs/name/insuredefi/insure"},
               baseDir,
               cache,
               pubsub,

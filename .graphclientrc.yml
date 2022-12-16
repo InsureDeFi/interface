@@ -2,7 +2,7 @@ sources:
   - name: insure
     handler:
       graphql:
-        endpoint: https://graph-gw.hostsites.ca/subgraphs/name/insuredefi/insure
+        endpoint: https://gw-testnet-graph.nervosdao.community/subgraphs/name/insuredefi/insure
     transforms:
       - autoPagination:
           validateSchema: true
