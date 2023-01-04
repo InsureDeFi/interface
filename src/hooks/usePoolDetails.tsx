@@ -1,4 +1,3 @@
-import { DataEntry } from 'react-minimal-pie-chart/types/commonTypes';
 import { useNetwork } from 'wagmi';
 import { getBuiltGraphSDK } from '../../.graphclient';
 import { getPoolAddress } from '@utils/networksConfig';
@@ -21,7 +20,14 @@ export function usePoolDetails() {
     refetchInterval: 4000,
   });
 
-  const poolData: DataEntry[] = [
+  type Data = {
+    color: string;
+    value: number;
+    key?: string | number;
+    title?: string | number;
+  }[];
+
+  const poolData: Data = [
     {
       title: 'Available Liquidity',
       value: Number(data?.availableAssets),
