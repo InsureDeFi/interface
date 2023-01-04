@@ -10,7 +10,7 @@
   "dependencies": {
     "@fontsource/dm-sans": "^4.5.9",
     "@headlessui/react": "^1.7.7",
-    "@rainbow-me/rainbowkit": "^0.6.0",
+    "@rainbow-me/rainbowkit": "^0.7.4",
     "@tanstack/react-query": "^4.20.9",
     "@walletconnect/web3-provider": "^1.8.0",
     "chart.js": "^3.9.1",
